@@ -56,7 +56,8 @@ pipeline {
             steps {
                 sh '''
                 echo "Starting Django development server..."
-                nohup . ${VENV_DIR}/bin/python manage.py runserver 0.0.0.0:8000 &
+                . ${VENV_DIR}/bin/activate
+                nohup ${VENV_DIR}/bin/python manage.py runserver 0.0.0.0:8000 &
                 '''
             }
         }
@@ -104,3 +105,4 @@ pipeline {
     }
 }
 
+	
