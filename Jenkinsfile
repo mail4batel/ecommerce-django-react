@@ -1,5 +1,9 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'yourusername/yourimage:tag' // Use the custom Docker image
+        }
+    }
 
     environment {
         VENV_DIR = '.venv'
@@ -16,14 +20,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh '''
-                echo "Updating system packages..."
-                apt-get update -y
-
-                echo "Installing dependencies using apt..."
-                apt-get install -y python3 python3-pip nodejs npm
-
                 echo "Setting up virtual environment and installing dependencies..."
-                python3 -m venv .venv
                 . .venv/bin/activate
                 pip install --upgrade pip
                 pip install -r requirements.txt
