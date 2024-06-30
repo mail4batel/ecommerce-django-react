@@ -18,10 +18,10 @@ pipeline {
                 withCredentials([string(credentialsId: 'SUDO_PASSWORD', variable: 'SUDO_PASS')]) {
                     sh '''
                     echo "Updating system packages..."
-                    echo $SUDO_PASS | sudo -S apt-get update -y
+                    echo "$SUDO_PASS" | sudo -S apt-get update -y
 
                     echo "Installing dependencies using apt..."
-                    echo $SUDO_PASS | sudo -S apt-get install -y python3 python3-pip nodejs npm
+                    echo "$SUDO_PASS" | sudo -S apt-get install -y python3 python3-pip nodejs npm
 
                     echo "Setting up virtual environment and installing dependencies..."
                     python3 -m venv .venv
