@@ -15,37 +15,35 @@ pipeline {
 
         stage('Build') {
             steps {
-                withCredentials([string(credentialsId: 'SUDO_PASSWORD', variable: 'SUDO_PASS')]) {
-                    sh '''
-                    echo "Updating system packages..."
-                    echo "$SUDO_PASS" | sudo -S apt-get update -y
+                sh '''
+                echo "Updating system packages..."
+                apt-get update -y
 
-                    echo "Installing dependencies using apt..."
-                    echo "$SUDO_PASS" | sudo -S apt-get install -y python3 python3-pip nodejs npm
+                echo "Installing dependencies using apt..."
+                apt-get install -y python3 python3-pip nodejs npm
 
-                    echo "Setting up virtual environment and installing dependencies..."
-                    python3 -m venv .venv
-                    . .venv/bin/activate
-                    pip install --upgrade pip
-                    pip install -r requirements.txt
+                echo "Setting up virtual environment and installing dependencies..."
+                python3 -m venv .venv
+                . .venv/bin/activate
+                pip install --upgrade pip
+                pip install -r requirements.txt
 
-                    echo "Building frontend..."
-                    cd frontend
-                    npm install
-                    npm run build
-                    cd ..
+                echo "Building frontend..."
+                cd frontend
+                npm install
+                npm run build
+                cd ..
 
-                    echo "Running database migrations..."
-                    .venv/bin/python manage.py makemigrations
-                    .venv/bin/python manage.py migrate
+                echo "Running database migrations..."
+                .venv/bin/python manage.py makemigrations
+                .venv/bin/python manage.py migrate
 
-                    echo "Collecting static files..."
-                    .venv/bin/python manage.py collectstatic --noinput
+                echo "Collecting static files..."
+                .venv/bin/python manage.py collectstatic --noinput
 
-                    echo "Starting Django development server..."
-                    nohup .venv/bin/python manage.py runserver 0.0.0.0:8000 &
-                    '''
-                }
+                echo "Starting Django development server..."
+                nohup .venv/bin/python manage.py runserver 0.0.0.0:8000 &
+                '''
             }
         }
 
