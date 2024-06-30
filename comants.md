@@ -4,6 +4,9 @@ git push origin main
 
 vagrant ssh jenkins-app
 sudo systemctl status jenkins
+sudo systemctl restart jenkins
+
+
 
 docker build -t mail4batel/djangoweb:tag .
 docker push mail4batel/djangoweb:tag
