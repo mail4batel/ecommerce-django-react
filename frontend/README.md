@@ -2,7 +2,7 @@
 <h2 align="center">Designed Using React</h2>
 
 ## TOOLS USED:
-
+batel
 - USED `REACT-BOOTSTRAP` & `REACT-ROUTER-BOOTSTRAP` FOR STYLING
 - USED BOOTSWATCH THEME - `LUX`
 - USED `FONT AWESOME` ICONS
