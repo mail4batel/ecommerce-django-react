@@ -17,10 +17,10 @@ pipeline {
             steps {
                 sh '''
                 echo "Updating system packages..."
-                sudo apt-get update -y
+                apt-get update -y
 
                 echo "Installing dependencies using apt..."
-                sudo apt-get install -y python3 python3-pip nodejs npm
+                apt-get install -y python3 python3-pip nodejs npm
 
                 echo "Setting up virtual environment and installing dependencies..."
                 python3 -m venv .venv
