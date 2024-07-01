@@ -3,6 +3,7 @@ pipeline {
 
     environment {
         VENV_DIR = '.venv'
+        DOCKER_IMAGE = "ecommerce-frontend"
     }
 
     stages {
@@ -25,14 +26,23 @@ pipeline {
             }
         }
 
-        stage('Build Frontend') {
+        stage('Build Frontend Docker Image') {
             steps {
                 dir('frontend') {
                     sh '''
                     echo "Building Docker image for frontend..."
-                    docker build -t ecommerce-frontend .
+                    docker build -t ${DOCKER_IMAGE} .
                     '''
                 }
+            }
+        }
+
+        stage('Run Frontend Docker Container') {
+            steps {
+                sh '''
+                echo "Running frontend Docker container..."
+                docker run -d -p 80:80 ${DOCKER_IMAGE}
+                '''
             }
         }
 
@@ -67,6 +77,8 @@ pipeline {
                 dir('frontend') {
                     sh '''
                     echo "Running frontend tests..."
+                    npm install
+                    npm install cross-env
                     npm test
                     '''
                 }
@@ -105,4 +117,3 @@ pipeline {
     }
 }
 
-	
