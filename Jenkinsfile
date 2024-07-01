@@ -33,7 +33,7 @@ pipeline {
                     docker build -t frontend-image .
 
                     echo "Running frontend Docker container..."
-                    docker run -d -p 8080:80 --name frontend-container frontend-image
+                    docker run -d -p 8081:80 --name frontend-container frontend-image
                     '''
                 }
             }
