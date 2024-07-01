@@ -3,7 +3,6 @@ pipeline {
 
     environment {
         VENV_DIR = '.venv'
-        DOCKER_IMAGE = "mail4batel/djangoweb:tag"
     }
 
     stages {
@@ -26,14 +25,17 @@ pipeline {
             }
         }
 
-        stage('Pull and Run Frontend Docker Container') {
+        stage('Build and Run Frontend Docker Container') {
             steps {
-                sh '''
-                echo "Pulling Docker image for frontend..."
-                docker pull ${DOCKER_IMAGE}
-                echo "Running frontend Docker container..."
-                docker run -d -p 80:80 ${DOCKER_IMAGE}
-                '''
+                dir('frontend') {
+                    sh '''
+                    echo "Building Docker image for frontend..."
+                    docker build -t frontend-image .
+
+                    echo "Running frontend Docker container..."
+                    docker run -d -p 8080:80 --name frontend-container frontend-image
+                    '''
+                }
             }
         }
 
@@ -63,8 +65,7 @@ pipeline {
             }
         }
 
-        
-        stage('Testing') {
+        stage('Testing Backend') {
             steps {
                 script {
                     catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
@@ -93,5 +94,16 @@ pipeline {
                 ])
             }
         }
+
+        stage('Cleanup') {
+            steps {
+                sh '''
+                echo "Stopping and removing frontend Docker container..."
+                docker stop frontend-container
+                docker rm frontend-container
+                '''
+            }
+        }
     }
 }
+
