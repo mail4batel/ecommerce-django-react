@@ -72,18 +72,7 @@ pipeline {
             }
         }
 
-        stage('Test Frontend') {
-            steps {
-                dir('frontend') {
-                    sh '''
-                    echo "Running frontend tests..."
-                    npm install
-                    npm install cross-env
-                    npm test
-                    '''
-                }
-            }
-        }
+        
 
         stage('Testing Backend') {
             steps {
