@@ -18,3 +18,7 @@ System.setProperty("hudson.model.DirectoryBrowserSupport.CSP", "")
 
 10.0.2.15:80
 172.17.0.1:80
+
+#build automatic--
+configure -> Build periodically ->
+H/2 * * * *
