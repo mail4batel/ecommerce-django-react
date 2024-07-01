@@ -13,3 +13,5 @@ docker push mail4batel/djangoweb:tag
 
 git config --global user.email "mail4batel@gmail.com"
 git config --global user.name "mail4batel"
+
+System.setProperty("hudson.model.DirectoryBrowserSupport.CSP", "")

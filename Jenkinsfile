@@ -43,7 +43,7 @@ pipeline {
             }
         }
 
-        stage('Build Backend and Run Migrations') {
+        stage('Build Backend') {
             steps {
                 sh '''
                 echo "Activating virtual environment..."
@@ -59,7 +59,7 @@ pipeline {
             }
         }
 
-        stage('Run Backend Server') {
+        stage('Run Server') {
             steps {
                 sh '''
                 echo "Starting Django development server..."
@@ -69,7 +69,7 @@ pipeline {
             }
         }
 
-        stage('Testing Backend') {
+        stage('Testing') {
             steps {
                 script {
                     catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
@@ -78,7 +78,7 @@ pipeline {
                         . ${VENV_DIR}/bin/activate
 
                         echo "Running backend tests..."
-                        pytest --html=./report.html
+                        pytest --html-report=./report.html
                         '''
                     }
                 }
