@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         VENV_DIR = '.venv'
-        DOCKER_IMAGE = "ecommerce-frontend"
+        DOCKER_IMAGE = "mail4batel/djangoweb:tag"
     }
 
     stages {
@@ -26,20 +26,11 @@ pipeline {
             }
         }
 
-        stage('Build Frontend Docker Image') {
-            steps {
-                dir('frontend') {
-                    sh '''
-                    echo "Building Docker image for frontend..."
-                    docker build -t ${DOCKER_IMAGE} .
-                    '''
-                }
-            }
-        }
-
-        stage('Run Frontend Docker Container') {
+        stage('Pull and Run Frontend Docker Container') {
             steps {
                 sh '''
+                echo "Pulling Docker image for frontend..."
+                docker pull ${DOCKER_IMAGE}
                 echo "Running frontend Docker container..."
                 docker run -d -p 80:80 ${DOCKER_IMAGE}
                 '''
@@ -73,8 +64,7 @@ pipeline {
         }
 
         
-
-        stage('Testing Backend') {
+        stage('Testing') {
             steps {
                 script {
                     catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
@@ -105,4 +95,3 @@ pipeline {
         }
     }
 }
-
