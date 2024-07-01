@@ -32,6 +32,10 @@ pipeline {
                     echo "Building Docker image for frontend..."
                     docker build -t frontend-image .
 
+                    echo "Stopping and removing any existing frontend Docker container..."
+                    docker stop frontend-container || true
+                    docker rm frontend-container || true
+
                     echo "Running frontend Docker container..."
                     docker run -d -p 8081:80 --name frontend-container frontend-image
                     '''
@@ -106,4 +110,3 @@ pipeline {
         }
     }
 }
-
