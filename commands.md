@@ -14,6 +14,8 @@ docker push mail4batel/djangoweb:tag
 git config --global user.email "mail4batel@gmail.com"
 git config --global user.name "mail4batel"
 
+*for the report--
+deshbord -> manage jenkins -> script console 
 System.setProperty("hudson.model.DirectoryBrowserSupport.CSP", "")
 
 10.0.2.15:80
