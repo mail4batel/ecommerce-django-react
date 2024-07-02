@@ -180,11 +180,11 @@ STATICFILES_DIRS = [
     BASE_DIR/'frontend/build/static', 
 ]
 
-# CORS_ALLOWED_ORIGINS = [
-#     "http://localhost:8000",
-#     "http://10.0.2.15:8000",
-#     "http://172.17.0.1:8000",
-# ]
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8000",
+    "http://10.0.2.15:8000",
+    "http://172.17.0.1:8000",
+]
 
 
 
