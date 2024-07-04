@@ -37,7 +37,7 @@ function HomeScreen({ history }) {
     <div>
       {!keyword && <ProductCarousel />}
 
-      <h1>Latest Products</h1>
+      <h1>BATEL'S SHOP</h1>
 
       {loading ? (
         <Loader />
