@@ -24,3 +24,6 @@ System.setProperty("hudson.model.DirectoryBrowserSupport.CSP", "")
 #build automatic--
 configure -> Build periodically ->
 H/2 * * * *
+
+docker pull mail4batel/app-frontend
+docker run -p 8081:80 mail4batel/app-frontend
