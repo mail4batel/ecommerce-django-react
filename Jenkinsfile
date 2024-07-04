@@ -98,7 +98,17 @@ pipeline {
                 ])
             }
         }
+//
+        stage('Push Image') {
+            steps {
+                script {
+                    sh 'docker tag frontend-container mail4batel/app-frontend'
+                    sh 'docker push mail4batel/app-frontend'
+                }
 
+            }
+        }
+//
         stage('Cleanup') {
             steps {
                 sh '''
