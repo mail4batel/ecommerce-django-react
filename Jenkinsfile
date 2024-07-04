@@ -101,9 +101,12 @@ pipeline {
 //
         stage('Push Image') {
             steps {
-                script {
-                    sh 'docker tag frontend-image mail4batel/app-frontend'
-                    sh 'docker push mail4batel/app-frontend'
+                withDockerRegistry([ credentialsId: "dockerhub_creds", url: "" ]) {
+                    script {
+                        sh 'docker tag frontend-image mail4batel/app-frontend'
+                        sh 'docker push mail4batel/app-frontend'
+                    }
+                    
                 }
 
             }
