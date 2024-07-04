@@ -31,4 +31,6 @@ edit /frontend/src/screens/HomeScreen.js (Latest Products)
 #to do after the build happens to see the website--
 docker pull mail4batel/app-frontend
 docker run -p 8081:80 mail4batel/app-frontend
+(to stop the command in the terminal - ctrl+c)
+then--
 in browser open localhost:8081
